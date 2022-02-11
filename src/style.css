@@ -1,0 +1,6 @@
+/*this file created by me*/
+.col-2 a{text-decoration: none;}
+.col-2 a:hover{text-decoration: underline;color: rgb(0, 40, 58);}
+.activeClass{
+    color:rgb(0, 174, 255);
+}

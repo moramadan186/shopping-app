@@ -1,0 +1,46 @@
+{
+  "products": [
+    {
+      "name": "Burger",
+      "price": "40",
+      "count": 0,
+      "isInCart": false,
+      "id": 1
+    },
+    {
+      "name": "Medium Burger",
+      "price": "50",
+      "count": 0,
+      "isInCart": false,
+      "id": 2
+    },
+    {
+      "name": "Large Burger",
+      "price": "60",
+      "count": 0,
+      "isInCart": false,
+      "id": 3
+    },
+    {
+      "name": "Fries",
+      "price": "15",
+      "count": 0,
+      "isInCart": false,
+      "id": 4
+    },
+    {
+      "name": "pepsi",
+      "price": "10",
+      "count": 0,
+      "isInCart": false,
+      "id": 5
+    },
+    {
+      "name": "m burger ",
+      "price": "40",
+      "count": 0,
+      "isInCart": false,
+      "id": 6
+    }
+  ]
+}
