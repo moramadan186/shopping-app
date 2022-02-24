@@ -38,14 +38,10 @@ class App extends Component {
     const { data } = await axios.get('http://localhost:3000/products');
     this.setState({ products: data })
   }
-  resetHandler = () => {
-    //clone 
-    let pro = [...this.state.products];
-    // console.log(pro);
-    //edit
-    pro.map(p => p.count = 0)
-    //setState
-    this.setState({ products: pro })
+  mapCountSum = () => {
+    let mapped = this.state.products.filter(p => p.isInCart === true && p.count !== 0).map(p => p.count), sumAll = 0;
+    for (const count of mapped) sumAll += count;
+    return sumAll;
   }
   /*4.6 Raising Events */
   handelDelete = async (proToDeleted) => {
@@ -73,10 +69,46 @@ class App extends Component {
         draggable: true,
         progress: undefined,
       });
-      this.setState({ products: oldProducts })
+      setTimeout(() => {
+        this.setState({ products: oldProducts })
+      }, 1000)
+
     }
 
   }
+  // addNewProduct = (n, p) => {
+  //   let products = [...this.state.products];
+
+  //   products.push({ id: (products[products.length - 1].id + 1), name: n, count: 1, price: p, isInCart: false })
+
+  //   console.log(products)
+  //   this.setState({ products })
+
+
+  // }
+  handleInCartChange = product => {
+    //clone 
+    const products = [...this.state.products];
+    const index = products.indexOf(product);
+    products[index] = { ...products[index] }
+
+    //Edit
+    products[index].isInCart = !products[index].isInCart
+
+    //set state
+    this.setState({ products })
+  }
+
+  resetHandler = () => {
+    //clone 
+    let pro = [...this.state.products];
+    // console.log(pro);
+    //edit
+    pro.map(p => p.count = 0)
+    //setState
+    this.setState({ products: pro })
+  }
+
   /*4.8  Deep clone objects to maintain increment function */
   incrementFromCart = (proToIn) => {
     // let newProducts = this.state.products.filter(p => p.id === proToIn.id),
@@ -96,11 +128,6 @@ class App extends Component {
     this.setState({ products: newProducts })
 
   }
-  mapCountSum = () => {
-    let mapped = this.state.products.filter(p => p.isInCart === true && p.count !== 0).map(p => p.count), sumAll = 0;
-    for (const count of mapped) sumAll += count;
-    return sumAll;
-  }
   // addProduct=(proToAdded)=>{
   //   let addedPro = this.state.products.filter(p => p.id === proToAdded.id)[0];
   //   console.log(addedPro)
@@ -111,28 +138,8 @@ class App extends Component {
   //   }
   //   this.setState({selectedProducts:newSelectedProducts})
   // }
-  handleInCartChange = product => {
-    //clone 
-    const products = [...this.state.products];
-    const index = products.indexOf(product);
-    products[index] = { ...products[index] }
-
-    //Edit
-    products[index].isInCart = !products[index].isInCart
-
-    //set state
-    this.setState({ products })
-  }
-  addNewProduct = (n, p) => {
-    let products = [...this.state.products];
-
-    products.push({ id: (products[products.length - 1].id + 1), name: n, count: 1, price: p, isInCart: false })
-
-    console.log(products)
-    this.setState({ products })
 
 
-  }
   render() {
     return (
       <React.Fragment>
@@ -146,7 +153,7 @@ class App extends Component {
             <Route path='/about' component={About}></Route>
             <Route path='/contact' component={Contact}></Route>
             <Route path='/c0'><h2>c0</h2></Route>
-            <Route path='/products/:id/:name?' render={(hlm) => <ProductDetails products={this.state.products} {...hlm} />} />
+
 
 
             <Route path='/admin' render={(hlm) => <Admin
@@ -155,12 +162,17 @@ class App extends Component {
               {...hlm} />
             } />
 
+            <Route path='/productForm/:id' render={(hlm) => <ProductForm
+              // addNewProduct={this.addNewProduct}
+              {...hlm} />
+            } />
+
             <Route path='/menu' render={(hlm) => <Menu
               products={this.state.products}
-              selectedProducts={this.state.selectedProducts}
-              onAddPro={this.addProduct}
+              // selectedProducts={this.state.selectedProducts}
+              // onAddPro={this.addProduct}
               onClick={this.handleInCartChange}
-              cartColor={this.state.cartColor}
+            // cartColor={this.state.cartColor}
             />} />
 
             <Route path='/cart' render={(hlm) => <ShoppingCart
@@ -171,10 +183,7 @@ class App extends Component {
               {...hlm} />
             } />
 
-            <Route path='/productForm/:id' render={(hlm) => <ProductForm
-              addNewProduct={this.addNewProduct}
-              {...hlm} />
-            } />
+            <Route path='/products/:id/:name?' render={(hlm) => <ProductDetails products={this.state.products} {...hlm} />} />
 
 
             <Route path='/login' render={(hlm) => <Login {...hlm} />} />

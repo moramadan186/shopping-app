@@ -2,7 +2,7 @@
   "products": [
     {
       "name": "Burger",
-      "price": "40",
+      "price": "40555",
       "count": 0,
       "isInCart": false,
       "id": 1
@@ -36,8 +36,8 @@
       "id": 5
     },
     {
-      "name": "m burger ",
-      "price": "40",
+      "name": "fanta",
+      "price": "10",
       "count": 0,
       "isInCart": false,
       "id": 6

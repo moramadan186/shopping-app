@@ -67,7 +67,7 @@ class Product extends Component {
                 </div>
                 <div className="col d-flex align-items-center">
                     <span className={this.checkFun()}>{this.props.product.count}</span>
-                    <button onClick={()=>this.props.onIncrement(this.props.product)} className="btn btn-primary btn-sm " style={{fontSize:'20px',padding:"3px 5px"}}>🍔</button>
+                    <button onClick={()=>this.props.onIncrement(this.props.product)} className="btn btn-primary btn-sm " style={{fontSize:'22px',padding:'0 9px'}}>+</button>
                     {/* /<button onClick={()=>{this.incrementHandler(3)}} className="btn btn-primary btn-sm m-2">+</button> */}
                     <span onClick={/*4.6 Raising Events*/() => this.props.onDelete(this.props.product)} style={{cursor:'pointer',fontSize:"20px"}}>
                         <i className="fas fa-trash m-2 text-danger"></i>
